@@ -5,7 +5,6 @@ import ghostImg from "@/assets/snapchat-ghost.png";
 
 export default function LoginPage() {
   const navigate = useNavigate();
-  const [step, setStep] = useState<"email" | "password">("email");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
@@ -13,19 +12,13 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleEmailNext = (e: React.FormEvent) => {
+  const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     if (!email.trim()) {
       setError("Please enter your email or username.");
       return;
     }
-    setStep("password");
-  };
-
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
     if (!password.trim()) {
       setError("Please enter your password.");
       return;
@@ -59,8 +52,7 @@ export default function LoginPage() {
 
       {/* Card */}
       <div className="w-full max-w-[360px] bg-white rounded-2xl shadow-xl px-7 py-8">
-        {step === "email" ? (
-          <form onSubmit={handleEmailNext} className="flex flex-col gap-4">
+          <form onSubmit={handleLogin} className="flex flex-col gap-4">
             <h2 className="text-[18px] font-bold text-center text-black mb-1">Log In</h2>
 
             <div className="flex flex-col gap-1">
@@ -91,53 +83,6 @@ export default function LoginPage() {
               />
             </div>
 
-            {error && (
-              <p className="text-red-500 text-[13px] text-center -mt-1">{error}</p>
-            )}
-
-            <button
-              type="submit"
-              className="w-full bg-[#FFFC00] hover:bg-yellow-400 active:bg-yellow-500 text-black font-bold rounded-full py-3 text-[15px] transition-all duration-150 mt-1 shadow-sm"
-            >
-              Next
-            </button>
-
-            <div className="flex items-center gap-2 my-1">
-              <div className="flex-1 h-px bg-gray-100" />
-              <span className="text-gray-400 text-[12px]">or</span>
-              <div className="flex-1 h-px bg-gray-100" />
-            </div>
-
-            {/* SSO Buttons */}
-            <button
-              type="button"
-              className="w-full flex items-center justify-center gap-3 border border-gray-200 rounded-full py-3 text-[14px] font-medium text-gray-700 hover:bg-gray-50 active:bg-gray-100 transition"
-            >
-              <GoogleIcon />
-              Continue with Google
-            </button>
-            <button
-              type="button"
-              className="w-full flex items-center justify-center gap-3 border border-gray-200 rounded-full py-3 text-[14px] font-medium text-gray-700 hover:bg-gray-50 active:bg-gray-100 transition"
-            >
-              <AppleIcon />
-              Continue with Apple
-            </button>
-          </form>
-        ) : (
-          <form onSubmit={handleLogin} className="flex flex-col gap-4">
-            <button
-              type="button"
-              onClick={() => { setStep("email"); setError(""); setPassword(""); }}
-              className="flex items-center gap-1 text-gray-500 text-[13px] mb-1 hover:text-gray-800 transition w-fit"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-              Back
-            </button>
-
-            <h2 className="text-[18px] font-bold text-center text-black -mt-1">Enter Password</h2>
-            <p className="text-[13px] text-gray-500 text-center -mt-2 truncate">{email}</p>
-
             <div className="flex flex-col gap-1">
               <label className="text-[12px] font-semibold text-gray-500 uppercase tracking-wider">
                 Password
@@ -146,7 +91,6 @@ export default function LoginPage() {
                 <input
                   type={showPassword ? "text" : "password"}
                   autoComplete="current-password"
-                  autoFocus
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Password"
@@ -182,8 +126,28 @@ export default function LoginPage() {
             <a href="#" className="text-center text-[13px] text-[#0070c9] hover:underline font-medium">
               Forgot Password?
             </a>
+
+            <div className="flex items-center gap-2 my-1">
+              <div className="flex-1 h-px bg-gray-100" />
+              <span className="text-gray-400 text-[12px]">or</span>
+              <div className="flex-1 h-px bg-gray-100" />
+            </div>
+
+            <button
+              type="button"
+              className="w-full flex items-center justify-center gap-3 border border-gray-200 rounded-full py-3 text-[14px] font-medium text-gray-700 hover:bg-gray-50 active:bg-gray-100 transition"
+            >
+              <GoogleIcon />
+              Continue with Google
+            </button>
+            <button
+              type="button"
+              className="w-full flex items-center justify-center gap-3 border border-gray-200 rounded-full py-3 text-[14px] font-medium text-gray-700 hover:bg-gray-50 active:bg-gray-100 transition"
+            >
+              <AppleIcon />
+              Continue with Apple
+            </button>
           </form>
-        )}
       </div>
 
       {/* Footer */}
