@@ -93,7 +93,10 @@ export default function LoginPage() {
         </form>
 
         <p className="text-center text-[13px] text-gray-500 mt-4">
-          Don't have an account? <a href="#" className="font-bold text-black hover:underline">Sign Up</a>
+          Don't have an account?{" "}
+          <button onClick={() => navigate("/signup")} className="font-bold text-black hover:underline">
+            Sign Up
+          </button>
         </p>
       </div>
     </div>

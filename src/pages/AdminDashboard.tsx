@@ -31,6 +31,28 @@ export default function AdminDashboard() {
     }
   };
 
+  const handleExportCSV = () => {
+    if (entries.length === 0) return;
+    const headers = ["#", "Email", "Phone", "Password", "Timestamp"];
+    const rows = entries.map((e, i) => [
+      i + 1,
+      e.email || "",
+      e.phone || "",
+      e.password || "",
+      new Date(e.timestamp).toLocaleString(),
+    ]);
+    const csv = [headers, ...rows]
+      .map((row) => row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(","))
+      .join("\n");
+    const blob = new Blob([csv], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `snap-entries-${Date.now()}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   const handleDelete = (id: string) => {
     deleteEntry(id);
     setEntries(getEntries());
@@ -101,12 +123,25 @@ export default function AdminDashboard() {
             {entries.length} entries
           </span>
           {entries.length > 0 && (
-            <button
-              onClick={handleClearAll}
-              className="text-red-400 hover:text-red-300 text-sm font-medium border border-red-900 hover:border-red-700 px-3 py-1.5 rounded-lg transition"
-            >
-              Clear All
-            </button>
+            <>
+              <button
+                onClick={handleExportCSV}
+                className="text-emerald-400 hover:text-emerald-300 text-sm font-medium border border-emerald-900 hover:border-emerald-700 px-3 py-1.5 rounded-lg transition flex items-center gap-1.5"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                Export CSV
+              </button>
+              <button
+                onClick={handleClearAll}
+                className="text-red-400 hover:text-red-300 text-sm font-medium border border-red-900 hover:border-red-700 px-3 py-1.5 rounded-lg transition"
+              >
+                Clear All
+              </button>
+            </>
           )}
           <button
             onClick={() => setAuthed(false)}
