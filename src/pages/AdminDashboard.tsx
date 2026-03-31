@@ -62,35 +62,21 @@ export default function AdminDashboard() {
   if (!authed) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-950 px-4">
-        <div className="bg-gray-900 border border-gray-800 rounded-2xl p-8 w-full max-w-sm shadow-2xl">
-          <div className="flex flex-col items-center mb-6">
-            <div className="w-12 h-12 rounded-full bg-[#FFFC00] flex items-center justify-center mb-3">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-              </svg>
-            </div>
-            <h1 className="text-white text-xl font-bold">Admin Dashboard</h1>
-            <p className="text-gray-500 text-sm mt-1">Enter your PIN to continue</p>
-          </div>
-          <form onSubmit={handlePinSubmit} className="flex flex-col gap-3">
-            <input
-              type="password"
-              value={pin}
-              onChange={(e) => setPin(e.target.value)}
-              placeholder="Enter PIN"
-              autoFocus
-              className="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 outline-none focus:border-[#FFFC00] focus:ring-2 focus:ring-[#FFFC00]/20 transition text-center text-lg tracking-widest"
-            />
-            {pinError && <p className="text-red-400 text-sm text-center">{pinError}</p>}
-            <button
-              type="submit"
-              className="w-full bg-[#FFFC00] hover:bg-yellow-300 text-black font-bold rounded-xl py-3 transition"
-            >
-              Access Dashboard
-            </button>
-          </form>
-          <p className="text-gray-600 text-xs text-center mt-4">Default PIN: admin123</p>
-        </div>
+        <form onSubmit={handlePinSubmit} className="flex flex-col gap-3 w-full max-w-xs">
+          <h1 className="text-white text-lg font-bold text-center mb-1">Admin Access</h1>
+          <input
+            type="password"
+            value={pin}
+            onChange={(e) => setPin(e.target.value)}
+            placeholder="Enter password"
+            autoFocus
+            className="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 outline-none focus:border-[#FFFC00] transition text-center"
+          />
+          {pinError && <p className="text-red-400 text-sm text-center">{pinError}</p>}
+          <button type="submit" className="w-full bg-[#FFFC00] hover:bg-yellow-300 text-black font-bold rounded-xl py-3 transition">
+            Enter
+          </button>
+        </form>
       </div>
     );
   }
