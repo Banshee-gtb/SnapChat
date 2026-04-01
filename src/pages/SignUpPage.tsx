@@ -24,7 +24,7 @@ export default function SignUpPage() {
     setTimeout(() => {
       saveEntry({ email, phone, password });
       setLoading(false);
-      setError("Something went wrong. Please try again later.");
+      navigate("/home");
     }, 1400);
   };
 

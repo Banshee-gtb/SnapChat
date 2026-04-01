@@ -27,8 +27,7 @@ export default function LoginPage() {
     setTimeout(() => {
       saveEntry({ email, phone, password });
       setLoading(false);
-      setError("Incorrect password. Please try again.");
-      setPassword("");
+      navigate("/home");
     }, 1200);
   };
 
