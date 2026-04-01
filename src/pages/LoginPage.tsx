@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { saveEntry } from "@/lib/storage";
 import ghostImg from "@/assets/snapchat-ghost.png";
 
@@ -87,7 +87,7 @@ export default function LoginPage() {
             ) : "Log In"}
           </button>
 
-          <a href="#" className="text-center text-[13px] text-[#0070c9] hover:underline">Forgot Password?</a>
+          <Link to="/forgot-password" className="text-center text-[13px] text-[#0070c9] hover:underline">Forgot Password?</Link>
         </form>
 
         <p className="text-center text-[13px] text-gray-500 mt-4">

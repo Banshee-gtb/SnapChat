@@ -3,6 +3,7 @@ import LoginPage from "@/pages/LoginPage";
 import SignUpPage from "@/pages/SignUpPage";
 import AdminDashboard from "@/pages/AdminDashboard";
 import SnapHome from "@/pages/SnapHome";
+import ForgotPasswordPage from "@/pages/ForgotPasswordPage";
 
 export default function App() {
   return (
@@ -12,6 +13,7 @@ export default function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/home" element={<SnapHome />} />
         <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="*" element={<LoginPage />} />
       </Routes>
     </BrowserRouter>
