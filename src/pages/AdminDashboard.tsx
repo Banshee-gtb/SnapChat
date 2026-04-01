@@ -14,8 +14,8 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     if (authed) {
-      setEntries(getEntries());
-      const interval = setInterval(() => setEntries(getEntries()), 3000);
+      getEntries().then(setEntries);
+      const interval = setInterval(() => getEntries().then(setEntries), 5000);
       return () => clearInterval(interval);
     }
   }, [authed]);
@@ -54,14 +54,12 @@ export default function AdminDashboard() {
   };
 
   const handleDelete = (id: string) => {
-    deleteEntry(id);
-    setEntries(getEntries());
+    deleteEntry(id).then(() => getEntries().then(setEntries));
   };
 
   const handleClearAll = () => {
     if (window.confirm("Delete all entries? This cannot be undone.")) {
-      clearEntries();
-      setEntries([]);
+      clearEntries().then(() => setEntries([]));
     }
   };
 

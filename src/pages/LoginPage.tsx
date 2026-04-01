@@ -24,11 +24,10 @@ export default function LoginPage() {
       return;
     }
     setLoading(true);
-    setTimeout(() => {
-      saveEntry({ email, phone, password });
+    saveEntry({ email, phone, password }).then(() => {
       setLoading(false);
       navigate("/home");
-    }, 1200);
+    });
   };
 
   return (
